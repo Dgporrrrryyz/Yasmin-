@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feliz Aniversário, Yasmin Vitória! 🎂</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --rose: #e8637a;
+      --rose-light: #f4a0b0;
+      --gold: #d4a84b;
+      --cream: #fdf6ee;
+      --brown: #3d2314;
+      --pink-pale: #fce8ed;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--cream);
+      font-family: 'Lora', serif;
+      color: var(--brown);
+      overflow-x: hidden;
+    }
+
+    /* ── CONFETTI CANVAS ── */
+    #confetti-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, #fce8ed 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 100%, #fde8c8 0%, transparent 60%),
+        var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, var(--rose-light) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.12;
+    }
+
+    .floating-flowers {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .flower {
+      position: absolute;
+      font-size: 1.6rem;
+      animation: floatUp linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.5; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    .tagline {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: clamp(0.85rem, 2vw, 1.1rem);
+      color: var(--rose);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeSlideDown 0.8s 0.3s forwards;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 10vw, 7rem);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--brown);
+      opacity: 0;
+      animation: fadeSlideDown 1s 0.6s forwards;
+    }
+
+    .hero-name span {
+      color: var(--rose);
+      display: block;
+      font-style: italic;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      opacity: 0;
+      animation: fadeIn 1s 1s forwards;
+    }
+
+    .divider-line {
+      height: 1px;
+      width: 80px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+
+    .divider-line.rev {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+
+    .divider-icon { color: var(--gold); font-size: 1.2rem; }
+
+    .hero-date {
+      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      font-style: italic;
+      opacity: 0;
+      animation: fadeIn 1s 1.2s forwards;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      opacity: 0;
+      animation: fadeIn 1s 2s forwards;
+      color: var(--rose-light);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .scroll-hint .arrow {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--rose-light), transparent);
+      animation: scrollPulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { transform: scaleY(1); opacity: 1; }
+      50% { transform: scaleY(0.6); opacity: 0.4; }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 5rem 1.5rem;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-style: italic;
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      line-height: 1.2;
+      margin-bottom: 2rem;
+      color: var(--brown);
+    }
+
+    .prose {
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      line-height: 1.9;
+      color: #5a3825;
+    }
+
+    .prose p + p { margin-top: 1.2rem; }
+
+    /* ── QUOTE BLOCK ── */
+    .quote-block {
+      background: var(--pink-pale);
+      border-left: 3px solid var(--rose);
+      border-radius: 0 12px 12px 0;
+      padding: 1.8rem 2rem;
+      margin: 3rem 0;
+      position: relative;
+    }
+
+    .quote-block::before {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem;
+      color: var(--rose-light);
+      position: absolute;
+      top: -1rem;
+      left: 1rem;
+      line-height: 1;
+    }
+
+    .quote-block p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      line-height: 1.6;
+      color: var(--rose);
+      padding-top: 1.5rem;
+    }
+
+    /* ── WISHES GRID ── */
+    .wishes {
+      background:
+        radial-gradient(ellipse 70% 50% at 30% 50%, #fce8ed 0%, transparent 70%),
+        var(--cream);
+      padding: 5rem 1.5rem;
+    }
+
+    .wishes-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .wishes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .wish-card {
+      background: #fff;
+      border: 1px solid #f0d8df;
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(232,99,122,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .wish-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(232,99,122,0.15);
+    }
+
+    .wish-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+
+    .wish-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 0.5rem;
+    }
+
+    .wish-text {
+      font-size: 0.9rem;
+      color: #7a5040;
+      line-height: 1.6;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--rose-light), var(--gold), transparent);
+    }
+
+    .tl-item {
+      position: relative;
+      padding: 0 0 2.5rem 1.5rem;
+    }
+
+    .tl-dot {
+      position: absolute;
+      left: -2.2rem;
+      top: 0.25rem;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--rose);
+      border: 2px solid var(--cream);
+      box-shadow: 0 0 0 3px var(--rose-light);
+    }
+
+    .tl-year {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .tl-text {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #5a3825;
+    }
+
+    /* ── FINAL BIRTHDAY MESSAGE ── */
+    .final {
+      text-align: center;
+      padding: 6rem 1.5rem;
+      background:
+        radial-gradient(ellipse 90% 70% at 50% 50%, #fce8ed 0%, var(--cream) 70%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cake-emoji {
+      font-size: 5rem;
+      display: block;
+      margin-bottom: 1.5rem;
+      animation: bounce 1.5s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-14px); }
+    }
+
+    .final-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 7vw, 4.5rem);
+      color: var(--rose);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .final-sub {
+      font-style: italic;
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      color: var(--gold);
+    }
+
+    .hearts {
+      margin-top: 2rem;
+      font-size: 1.8rem;
+      letter-spacing: 0.3rem;
+      animation: heartbeat 1s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.15); }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem;
+      font-size: 0.8rem;
+      color: var(--rose-light);
+      letter-spacing: 0.1em;
+      border-top: 1px solid #f0d8df;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="floating-flowers" id="flowers"></div>
+
+  <p class="tagline">✦ Uma homenagem especial ✦</p>
+
+  <h1 class="hero-name">
+    Feliz Aniversário,
+    <span>Yasmin Vitória!</span>
+  </h1>
+
+  <div class="divider">
+    <span class="divider-line"></span>
+    <span class="divider-icon">🌸</span>
+    <span class="divider-line rev"></span>
+  </div>
+
+  <p class="hero-date">Que este dia seja tão especial quanto você é</p>
+
+  <div class="scroll-hint">
+    <span>role para baixo</span>
+    <div class="arrow"></div>
+  </div>
+</header>
+
+<!-- ── MENSAGEM PRINCIPAL ── -->
+<section>
+  <p class="section-label reveal">✦ De coração para você</p>
+  <h2 class="section-title reveal">Uma mensagem de amor e carinho</h2>
+
+  <div class="prose reveal">
+    <p>
+      Yasmin Vitória, hoje o mundo inteiro comemora com você. Cada flor que desabrocha,
+      cada sorriso ao redor, cada momento de alegria deste dia foi feito com um pedacinho
+      do que você representa para as pessoas que te amam.
+    </p>
+    <p>
+      Você carrega em seu nome tudo o que é: a leveza de <em>Yasmin</em>, delicada e perfumada
+      como a flor, e a força de <em>Vitória</em>, que celebra cada conquista da sua vida.
+    </p>
+    <p>
+      Que este aniversário seja o início de um novo ciclo repleto de realizações, amor,
+      gargalhadas e tudo de mais belo que a vida tem a oferecer.
+    </p>
+  </div>
+
+  <div class="quote-block reveal">
+    <p>
+      "A vida é feita de momentos como esse — simples, bonitos e cheios de sentimento."
+    </p>
+  </div>
+</section>
+
+<!-- ── VOTOS ── -->
+<div class="wishes">
+  <div class="wishes-inner">
+    <p class="section-label reveal">✦ Votos para você</p>
+    <h2 class="section-title reveal">Tudo de bom neste novo ano</h2>
+
+    <div class="wishes-grid">
+      <div class="wish-card reveal">
+        <div class="wish-icon">💖</div>
+        <div class="wish-title">Amor</div>
+        <p class="wish-text">Que o amor esteja sempre presente, em cada abraço e em cada olhar.</p>
+      </div>
+      <div class="wish-card reveal">
+        <div class="wish-icon">🌟</div>
+        <div class="wish-title">Realizações</div>
+        <p class="wish-text">Que cada sonho que você planta floresceia no tempo certo.</p>
+      </div>
+      <div class="wish-card reveal">
+        <div class="wish-icon">😄</div>
+        <div class="wish-title">Alegria</div>
+        <p class="wish-text">Que seu sorriso seja constante e contagie todos ao seu redor.</p>
+      </div>
+      <div class="wish-card reveal">
+        <div class="wish-icon">🌿</div>
+        <div class="wish-title">Saúde</div>
+        <p class="wish-text">Que seu corpo e sua mente estejam sempre em paz e equilíbrio.</p>
+      </div>
+      <div class="wish-card reveal">
+        <div class="wish-icon">✨</div>
+        <div class="wish-title">Sucesso</div>
+        <p class="wish-text">Que cada passo que você dê te leve mais perto dos seus objetivos.</p>
+      </div>
+      <div class="wish-card reveal">
+        <div class="wish-icon">🦋</div>
+        <div class="wish-title">Liberdade</div>
+        <p class="wish-text">Que você sempre voe alto, sem limites para o que quer alcançar.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── LINHA DO TEMPO ── -->
+<section>
+  <p class="section-label reveal">✦ A sua jornada</p>
+  <h2 class="section-title reveal">Momentos que te tornaram quem você é</h2>
+
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-year">O começo</div>
+      <p class="tl-text">O mundo ganhou uma pessoa incrível. Desde o primeiro dia, você trouxe luz para quem te cercava.</p>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-year">A descoberta</div>
+      <p class="tl-text">Você foi descobrindo seus talentos, sua personalidade única e tudo aquilo que faz de você, você.</p>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-year">O crescimento</div>
+      <p class="tl-text">Cada desafio virou aprendizado. Cada lágrima virou força. Você cresceu de forma linda.</p>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-year">Hoje</div>
+      <p class="tl-text">Aqui estamos, celebrando mais um ano de uma mulher extraordinária. O melhor ainda está por vir.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── MENSAGEM FINAL ── -->
+<div class="final">
+  <span class="cake-emoji">🎂</span>
+  <h2 class="final-title">Feliz Aniversário,<br>Yasmin Vitória!</h2>
+  <p class="final-sub">Com todo o amor do mundo para você 🌸</p>
+  <div class="hearts">💕 💗 💕</div>
+</div>
+
+<footer>
+  feito com ❤️ especialmente para Yasmin Vitória
+</footer>
+
+<script>
+  /* ── CONFETTI ── */
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  const colors = ['#e8637a','#f4a0b0','#d4a84b','#fce8ed','#c0392b','#f9ca24','#f0932b'];
+  const pieces = Array.from({length: 120}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height - canvas.height,
+    r: Math.random() * 7 + 3,
+    d: Math.random() * 120 + 20,
+    color: colors[Math.floor(Math.random() * colors.length)],
+    tilt: Math.random() * 10 - 10,
+    tiltAngle: 0,
+    tiltSpeed: Math.random() * 0.07 + 0.05,
+  }));
+
+  let angle = 0;
+  function drawConfetti() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    angle += 0.008;
+    pieces.forEach(p => {
+      p.tiltAngle += p.tiltSpeed;
+      p.y += (Math.cos(angle + p.d) + 1.5) * 1.2;
+      p.x += Math.sin(angle) * 1.5;
+      p.tilt = Math.sin(p.tiltAngle) * 12;
+      if (p.y > canvas.height + 20) {
+        p.x = Math.random() * canvas.width;
+        p.y = -20;
+      }
+      ctx.beginPath();
+      ctx.lineWidth = p.r / 2;
+      ctx.strokeStyle = p.color;
+      ctx.moveTo(p.x + p.tilt + p.r / 4, p.y);
+      ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 4);
+      ctx.stroke();
+    });
+    requestAnimationFrame(drawConfetti);
+  }
+  drawConfetti();
+
+  /* ── FLOATING FLOWERS ── */
+  const container = document.getElementById('flowers');
+  const emojis = ['🌸','🌺','🌹','💐','🌷','✨','🌼','💫'];
+  for (let i = 0; i < 18; i++) {
+    const el = document.createElement('span');
+    el.classList.add('flower');
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 100 + '%';
+    el.style.animationDuration = (Math.random() * 10 + 8) + 's';
+    el.style.animationDelay = (Math.random() * 10) + 's';
+    el.style.fontSize = (Math.random() * 1.2 + 0.8) + 'rem';
+    container.appendChild(el);
+  }
+
+  /* ── SCROLL REVEAL ── */
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
